@@ -1,0 +1,148 @@
+$main-color: #f0f0f0;
+$secondary-color: #1d1f20;
+
+ @mixin display-child($n) {
+    @for $i from 2 through $n {
+      &:nth-child(#{$i}) {
+        a {
+          display: inline-block;
+        }
+      }
+    }
+ }
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  color: #fff;
+  background: #949c4e;
+  background: linear-gradient(
+    115deg,
+    rgba(86, 216, 228, 1) 10%,
+    rgba(159, 1, 234, 1) 90%
+  );
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  min-height: 100vh;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background: lighten($main-color, 5%);
+  padding: 1rem;
+  margin: 3rem auto;
+  border-radius: 0.2rem;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.3);
+  counter-reset: pagination;
+  text-align: center;
+  &:after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+  ul {
+    width: 100%;
+  }
+}
+
+.xsmall {
+  width: 14rem;
+}
+
+ul, li {
+  list-style: none;
+  display: inline;
+  padding-left: 0px;
+}
+
+li {
+  counter-increment: pagination;
+  &:hover {
+    a {
+      color: lighten($main-color, 5%);
+      background-color: $secondary-color;
+      border: solid 1px $secondary-color;
+    }
+  }
+  &.active {
+    a {
+      color: lighten($main-color, 5%);
+      background-color: $secondary-color;
+      border: solid 1px $secondary-color;
+    }
+  }
+  &:first-child {
+    float: left;
+    a {
+      &:after {
+        content: "Previous";
+      }
+    }
+  }
+  &:nth-child(2) {
+    counter-reset: pagination;
+  }
+  &:last-child {
+    float: right;
+    a {
+      &:after {
+        content: "Next";
+      }
+    }
+  }
+  a {
+    border: solid 1px darken($main-color, 10%);
+    border-radius: 0.2rem;
+    color: darken($main-color, 45%);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    text-align: center;
+    padding: 0.5rem 0.9rem;
+  }
+}
+
+.xsmall {
+  li {
+    display: none;
+    &.active {
+      display: inline;
+    }
+    &:first-child {
+      display: inline;
+      a:after {
+        content: "Prev";
+       }
+    }
+    &:last-child {
+      display: inline;
+      a:after {
+        content: "Next";
+      }
+    }
+  }
+  
+  body .ui-paginator{
+      display: none !important;
+  }
+
+  .ui-paginator-bottom .ui-paginator .ui-widget .ui-widget-header .ui-unselectable-text .ui-helper-clearfix .ng-star-inserted{
+      display: none !important;
+  }
+}
